@@ -19,23 +19,6 @@ This repository contains a simple web application where users can post content, 
 
 ![Edit Profile Preview](static/images/edit_profile_example.png)
 
-## Usage
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd <repository-folder>
-   ```
-
-2. Run the application:
-   ```bash
-   go run main.goa
-   ```
-
-3. Open your browser and navigate to:
-   ```
-   http://localhost:8080
-   ```
 
 ## Folder Structure
 
