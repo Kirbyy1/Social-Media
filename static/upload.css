@@ -1,0 +1,139 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #141414; /* Dark background */
+    color: #fff; /* White text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Header Styling */
+header {
+    width: 100%;
+    background-color: #1a1a1a; /* Dark header background */
+    padding: 15px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #1d9bf0; /* Bright blue logo */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+nav a:hover {
+    background-color: #0d8ce0; /* Hover effect for links */
+}
+
+/* Upload Page Styles */
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.upload-container .container {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    background-color: #1a1a1a; /* Dark background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.upload-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.current-picture h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #1d9bf0; /* Blue border */
+    margin-bottom: 20px;
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #2c2c2c;
+    background-color: #2c2c2c;
+    color: #fff;
+    font-size: 16px;
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1d9bf0; /* Blue button */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background-color: #0d8ce0; /* Darker blue on hover */
+}
+
+.return-home-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #1d9bf0;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.return-home-btn:hover {
+    background-color: #0d8ce0;
+}

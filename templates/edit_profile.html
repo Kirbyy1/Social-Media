@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/static/edit_profile.css"> <!-- External CSS for styling -->
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1 class="logo">Gypsi Network</h1>
+        <nav>
+            <a href="/home" class="nav-link">Home</a>
+            <a href="/logout" class="nav-link">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<div class="main-content">
+    <div class="profile-sidebar">
+        <div class="profile-info">
+            <h2>Edit Profile</h2>
+
+            <!-- Profile Picture Upload Section -->
+            <div class="profile-picture">
+                <!-- Show the current profile picture or a default one -->
+                {{if .ProfilePictureData}}
+                <img src="data:image/jpeg;base64,{{.ProfilePictureBase64}}" alt="Profile Picture" class="profile-image">
+                {{else}}
+                <img src="/static/default-profile.png" alt="Default Profile Picture" class="profile-image">
+                {{end}}
+            </div>
+            <form action="/edit-profile" method="POST" enctype="multipart/form-data">
+                <label for="profilePicture">Change Profile Picture</label>
+                <input type="file" name="profilePicture" id="profilePicture" class="file-input">
+
+                <label for="bio">Update Bio</label>
+                <textarea name="bio" id="bio" class="bio-input" placeholder="Write something about yourself..." rows="4">{{.Bio}}</textarea>
+
+                <!-- Save Button -->
+                <button type="submit" class="button save-btn">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Gypsi Network. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

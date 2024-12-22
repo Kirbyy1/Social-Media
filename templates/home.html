@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Gypsi Network</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1 class="logo">Gypsi Network</h1>
+        <nav>
+            <!-- Add links here if needed -->
+        </nav>
+    </div>
+</header>
+
+<div class="main-content">
+    <div class="profile-sidebar">
+        <div class="profile-info">
+            <!-- Make profile picture clickable -->
+            <a href="/edit-profile">
+                {{if .User.ProfilePictureBase64}}
+                <img src="data:image/jpeg;base64,{{.User.ProfilePictureBase64}}" alt="Profile Picture" class="profile-image">
+                {{else}}
+                <img src="/static/default_profile.png" alt="Default Profile Picture" class="profile-image">
+                {{end}}
+            </a>
+            <h2 class="username">{{.User.Username}} <i class="fas fa-user"></i></h2>
+            <p class="bio">{{.User.Bio}}</p>
+        </div>
+
+        <!-- Fake Friend List -->
+        <div class="friend-list">
+            <h3>Friends</h3>
+            <ul>
+                <li class="friend-item">
+                    <img src="/static/default_profile.jpg" alt="Friend 1" class="friend-image">
+                    <span class="friend-name">John Doe</span>
+                </li>
+                <li class="friend-item">
+                    <img src="/static/default_profile.jpg" alt="Friend 2" class="friend-image">
+                    <span class="friend-name">Jane Smith</span>
+                </li>
+                <li class="friend-item">
+                    <img src="/static/default_profile.jpg" alt="Friend 3" class="friend-image">
+                    <span class="friend-name">Mark T.</span>
+                </li>
+                <li class="friend-item">
+                    <img src="/static/default_profile.jpg" alt="Friend 4" class="friend-image">
+                    <span class="friend-name">Alice W.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="logout-btn-container">
+            <a href="/logout" class="button logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <!-- Feed Section -->
+    <div class="feed">
+        <div class="feed-header">
+            <h2>Your Feed</h2>
+        </div>
+
+        <!-- Post Creation Form (this stays outside the loop) -->
+        <div class="post-create">
+            <form action="/create-post" method="POST">
+                <textarea name="content" placeholder="What's happening?" rows="3"></textarea>
+                <button type="submit" class="button post-btn">
+                    <i class="fas fa-paper-plane"></i> Post
+                </button>
+            </form>
+        </div>
+
+        <!-- Posts -->
+        <div class="posts">
+            {{range .Posts}}
+            <div class="post">
+                <div class="post-header">
+                    <img src="{{.User.ProfilePictureBase64}}" alt="User Profile Picture" class="post-user-image">
+                    <span class="post-username">{{.User.Username}}</span>
+                </div>
+                <p class="post-content">{{.Content}}</p>
+                <p class="post-time">{{.CreatedAt}}</p>
+            </div>
+            {{end}}
+
+
+
+
+        </div>
+    </div>
+
+    <!-- Right Sidebar (Optional Ads) -->
+    <div class="ad-sidebar">
+        <div class="ad-banner">
+            <img src="/static/ad.png" alt="Ad Banner 1">
+        </div>
+        <div class="ad-banner">
+            <img src="/static/ad.png" alt="Ad Banner 2">
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Gypsi Network. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

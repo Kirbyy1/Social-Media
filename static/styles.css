@@ -1,0 +1,109 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #141414;
+    color: white;
+    overflow: hidden;
+}
+
+.landing-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between buttons */
+}
+
+.create-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none; /* No underline for links */
+    color: white;
+    background-color: #1D9BF0;
+}
+
+.create-btn:hover {
+    opacity: 0.8;
+}
+
+/* Styling for the "Already have an account? Sign in" text */
+.sign-in-link {
+    font-size: 16px;
+    color: #aaa;
+    margin-top: 20px;
+}
+
+.sign-in-link a {
+    text-decoration: none;
+    color: #1D9BF0; /* Blue color for the Sign In link */
+}
+
+.sign-in-link a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+footer ul li a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+footer ul li a:hover {
+    text-decoration: underline;
+}

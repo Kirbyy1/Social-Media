@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Profile Picture</title>
+    <link rel="stylesheet" href="/static/upload.css"> <!-- Corrected path to the upload.css file -->
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1 class="logo">Gypsi Netowork</h1>
+        <nav>
+            <a href="/home" class="nav-link">Home</a>
+            <a href="/logout" class="nav-link">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<div class="upload-container">
+    <div class="container">
+        <h1 class="username">Upload a New Profile Picture</h1>
+
+        <!-- Display current profile picture if available -->
+        {{if .ProfilePictureBase64}}
+        <div class="current-picture">
+            <h2>Your Current Picture</h2>
+            <img src="data:image/jpeg;base64,{{.ProfilePictureBase64}}" alt="Profile Picture" class="profile-picture">
+        </div>
+        {{else}}
+        <div class="current-picture">
+            <h2>No profile picture uploaded yet</h2>
+        </div>
+        {{end}}
+
+        <!-- Form for uploading the image -->
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="profilePicture" accept="image/*" required>
+            <button type="submit" class="button upload-btn">Upload Picture</button>
+        </form>
+
+        <a href="/home" class="button return-home-btn">Back to Home</a>
+    </div>
+</div>
+</body>
+</html>
