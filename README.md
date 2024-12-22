@@ -13,29 +13,10 @@ This repository contains a simple web application where users can post content, 
 
 ### User Feed
 
-![User Feed Preview](static/images/feed_example.png)
+![User Feed Preview](https://raw.githubusercontent.com/Kirbyy1/Social-Media/refs/heads/main/github_images/feed.png)
+![User Feed Preview](https://raw.githubusercontent.com/Kirbyy1/Social-Media/refs/heads/main/github_images/landing_page.png)
 
-### Edit Profile Page
 
-![Edit Profile Preview](static/images/edit_profile_example.png)
-
-## Usage
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd <repository-folder>
-   ```
-
-2. Run the application:
-   ```bash
-   go run main.goa
-   ```
-
-3. Open your browser and navigate to:
-   ```
-   http://localhost:8080
-   ```
 
 ## Folder Structure
 
