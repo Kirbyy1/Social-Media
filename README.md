@@ -11,10 +11,16 @@ This repository contains a simple web application where users can post content, 
 
 ## Preview
 
+
+### Landing Page
+
+
+![User Landing Page Preview](https://raw.githubusercontent.com/Kirbyy1/Social-Media/refs/heads/main/github_images/landing_page.png)
+
+
 ### User Feed
 
 ![User Feed Preview](https://raw.githubusercontent.com/Kirbyy1/Social-Media/refs/heads/main/github_images/feed.png)
-![User Landing Page Preview](https://raw.githubusercontent.com/Kirbyy1/Social-Media/refs/heads/main/github_images/landing_page.png)
 
 
 
