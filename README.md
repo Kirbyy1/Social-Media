@@ -13,7 +13,7 @@ This repository contains a simple web application where users can post content, 
 
 ### User Feed
 
-![User Feed Preview]([static/images/feed_example.png](https://raw.githubusercontent.com/Kirbyy1/Social-Media/refs/heads/main/github_images/feed.png))
+![User Feed Preview]([static/images/feed_example.png](https://raw.githubusercontent.com/Kirbyy1/Social-Media/refs/heads/main/github_images/feed.png)
 
 
 
