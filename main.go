@@ -49,14 +49,14 @@ func seedData() {
 	db.Create(&post)
 }
 
-func fetchPosts() ([]Post, error) {
-	var posts []Post
-	result := db.Preload("User").Order("created_at desc").Find(&posts)
-	if result.Error != nil {
-		return nil, result.Error
-	}
-	return posts, nil
-}
+//func fetchPosts() ([]Post, error) {
+//	var posts []Post
+//	result := db.Preload("User").Order("created_at desc").Find(&posts)
+//	if result.Error != nil {
+//		return nil, result.Error
+//	}
+//	return posts, nil
+//}
 
 func createPostHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
