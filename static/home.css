@@ -1,429 +1,80 @@
-/* Reset and base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+/* Post container */
+.post-container {
+    background-color: #1a1a1a; /* Card background color */
+    border: 1px solid #333; /* Border for separation */
+    border-radius: 10px; /* Rounded corners */
+    margin: 15px 0; /* Space between posts */
+    padding: 15px; /* Padding inside the post */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
-body {
-    background-color: #141414; /* Dark background for consistency */
-    color: #fff; /* White text for better contrast */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    flex-direction: column;
-    box-sizing: border-box;
-}
-
-/* Header styles */
-header {
-    width: 100%;
-    background-color: #1a1a1a; /* Dark background for header */
-    padding: 15px 0;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header .logo {
-    font-size: 30px;
-    font-weight: bold;
-    color: #1d9bf0; /* Bright blue color for the logo */
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-left: 20px;
-}
-
-nav a:hover {
-    background-color: #0d8ce0; /* Lighter blue on hover */
-}
-
-/* Main Content */
-.main-content {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-    padding: 20px;
-    flex-grow: 1;
-}
-
-/* Profile Sidebar */
-.profile-sidebar {
-    width: 250px; /* Or your desired width */
-    padding: 20px;
-    background-color: #1a1a1a; /* You can change this */
-    box-sizing: border-box; /* Ensure padding is within the container */
-    display: flex;
-    flex-direction: column;
-    position: relative; /* Makes it possible to position the logout button at the bottom */
-
-}
-/* Logout Button Container */
-.logout-btn-container {
-    position: absolute;
-    bottom: 20px; /* Pushes the logout button to the very bottom */
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center; /* Horizontally centers the logout button */
-    align-items: center; /* Vertically centers the logout button */
-    width: 100%;
-    padding: 10px;
-}
-
-.logout-btn {
-    display: inline-flex;
-    align-items: center;
-    background-color: #e74c3c;
-    color: white;
-    padding: 10px 15px;
-    font-size: 1rem;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.logout-btn i {
-    margin-right: 8px; /* Adds some space between the icon and text */
-}
-
-.logout-btn:hover {
-    background-color: #c0392b;
-}
-
-/* Profile Info */
-.profile-info {
-    text-align: center;
-    position: relative; /* To position the pencil icon */
-    padding: 10px;
-    background-color: #1a1a1a; /* Optional: makes it stand out */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Profile Image (Responsive + Hover Effects) */
-.profile-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    cursor: pointer;
-    position: relative; /* To position the pencil icon */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* Hover Effects for Profile Image */
-.profile-image:hover {
-    opacity: 0.8;  /* Slightly transparent */
-    transform: scale(1.05);  /* Slightly enlarge the profile image */
-}
-
-/* Add a green border on hover */
-.profile-sidebar a:hover .profile-image {
-    border: 2px solid #4CAF50; /* Green border when hovered */
-}
-
-/* Pencil Icon - Positioned inside the profile image */
-.profile-info a:after {
-    content: "\f303"; /* Font Awesome pencil icon */
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
-    color: white;
-    padding: 8px;
-    border-radius: 50%;
-    font-size: 20px;
-    display: none; /* Hidden by default */
-    transition: opacity 0.3s ease;
-}
-
-/* Show the pencil icon when hovering over the profile picture */
-.profile-info a:hover:after {
-    display: block; /* Show the icon on hover */
-}
-
-
-.username {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-}
-
-.bio {
-    color: #8a8a8a; /* Lighter gray color for the bio */
-    font-size: 16px;
-    margin: 10px 0;
-}
-
-.upload-btn {
-    padding: 12px 20px;
-    background-color: #1d9bf0; /* Blue button */
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    display: inline-block;
-    margin-top: 20px;
-    transition: 0.3s;
-}
-
-.upload-btn:hover {
-    background-color: #0d8ce0; /* Darker blue on hover */
-}
-
-.fas {
-    transition: color 0.3s ease-in-out;
-}
-
-.fas:hover {
-    color: #007bff; /* Change to blue when hovered */
-}
-
-
-/* Feed Styles */
-.feed {
-    flex: 1;
-    margin-left: 20px;
-    background-color: #1a1a1a; /* Dark background for the feed */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.feed-header h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 20px;
-}
-
-.post-create textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #2c2c2c;
-    background-color: #2c2c2c;
-    color: #fff;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.post-create button {
-    padding: 12px 20px;
-    background-color: #1d9bf0;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    transition: 0.3s;
-}
-
-.post-create button:hover {
-    background-color: #0d8ce0;
-}
-
-.posts .post {
-    background-color: #2c2c2c; /* Slightly lighter background for posts */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px;
-    padding: 15px;
-}
-
+/* Post header: profile image, username, and timestamp */
 .post-header {
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 
-.post-user-image {
-    width: 40px;
+.post-header img {
+    width: 40px; /* Profile image size */
     height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
+    border-radius: 50%; /* Circular profile picture */
+    margin-right: 10px; /* Space between image and text */
 }
 
-.post-username {
+.post-header .username {
     font-weight: bold;
-    color: #1d9bf0;
-}
-
-.post-content {
-    margin-top: 10px;
-    color: #fff;
-}
-
-.bio-form {
-    margin-top: 10px;
-}
-
-.bio-textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    background-color: #2c2c2c;
-    color: #fff;
-    border: 1px solid #444;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.save-bio-btn {
-    background-color: #1d9bf0;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
     font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+    color: #1d9bf0; /* Bright blue for username */
 }
 
-.save-bio-btn:hover {
-    background-color: #0d8ce0;
+.post-header .timestamp {
+    font-size: 12px;
+    color: #8a8a8a; /* Light gray for timestamps */
+    margin-left: 10px;
 }
 
-
-/* Profile Sidebar */
-.profile-sidebar {
-    width: 250px;
-    margin-right: 20px;
+/* Post content text */
+.post-content {
+    color: #fff;
+    font-size: 14px;
+    margin: 10px 0;
+    line-height: 1.5;
 }
 
-/* Friend List Section */
-.friend-list {
-    margin-top: 20px;
-    background-color: #1a1a1a;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.friend-list h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.friend-list ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.friend-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.friend-item .friend-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.friend-item .friend-name {
-    font-size: 1rem;
-    font-weight: normal;
-}
-
-/* Layout for main content */
-.main-content {
+/* Post actions: reply, retweet, like */
+.post-actions {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-}
-
-/* Feed Section */
-.feed {
-    flex: 1;
-    max-width: 700px;
-}
-
-.feed-header {
-    margin-bottom: 10px;
-}
-
-.post-create textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-}
-
-.button.post-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.button.post-btn:hover {
-    background-color: #45a049;
-}
-
-.posts {
-    margin-top: 20px;
-}
-
-/* Ad Sidebar */
-.ad-sidebar {
-    width: 250px;
-}
-
-.ad-banner {
-    margin-bottom: 20px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    padding: 10px;
-}
-
-.ad-banner img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-
-/* Footer Styles */
-footer {
-    background-color: #141414;
-    padding: 15px;
-    text-align: center;
-    color: #8a8a8a;
+    align-items: center;
+    margin-top: 10px;
     font-size: 14px;
-    border-top: 1px solid #2c2c2c;
+    color: #8a8a8a;
 }
 
-footer a {
-    color: #1d9bf0;
-    text-decoration: none;
+.post-actions button {
+    background: none;
+    border: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-footer a:hover {
-    text-decoration: underline;
+.post-actions button:hover {
+    color: #1d9bf0; /* Bright blue on hover */
+}
+
+.post-actions i {
+    margin-right: 5px; /* Space between icon and text */
+}
+
+/* Example of like button */
+.post-actions .like {
+    color: #e0245e; /* Pink/red for likes */
+}
+
+.post-actions .like:hover {
+    color: #ff6384; /* Lighter pink on hover */
 }

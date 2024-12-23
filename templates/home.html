@@ -3,10 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Gypsi Network</title>
+    <title>Welcome - Alekkum Network</title>
     <link rel="stylesheet" href="/static/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .post {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .post-create textarea {
+            width: 100%;
+            background-color: #1e1e1e;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .post-create button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .post-create button:hover {
+            background-color: #45a049;
+        }
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -26,7 +73,7 @@
                 {{if .User.ProfilePictureBase64}}
                 <img src="data:image/jpeg;base64,{{.User.ProfilePictureBase64}}" alt="Profile Picture" class="profile-image">
                 {{else}}
-                <img src="/static/default_profile.png" alt="Default Profile Picture" class="profile-image">
+                <img src="/static/default_profile.jpg" alt="Default Profile Picture" class="profile-image">
                 {{end}}
             </a>
             <h2 class="username">{{.User.Username}} <i class="fas fa-user"></i></h2>
@@ -39,19 +86,19 @@
             <ul>
                 <li class="friend-item">
                     <img src="/static/default_profile.jpg" alt="Friend 1" class="friend-image">
-                    <span class="friend-name">John Doe</span>
+                    <span class="friend-name">Fwtaras</span>
                 </li>
                 <li class="friend-item">
                     <img src="/static/default_profile.jpg" alt="Friend 2" class="friend-image">
-                    <span class="friend-name">Jane Smith</span>
+                    <span class="friend-name">Aggelos</span>
                 </li>
                 <li class="friend-item">
                     <img src="/static/default_profile.jpg" alt="Friend 3" class="friend-image">
-                    <span class="friend-name">Mark T.</span>
+                    <span class="friend-name">Maria</span>
                 </li>
                 <li class="friend-item">
                     <img src="/static/default_profile.jpg" alt="Friend 4" class="friend-image">
-                    <span class="friend-name">Alice W.</span>
+                    <span class="friend-name">Uwu</span>
                 </li>
             </ul>
         </div>
@@ -68,7 +115,7 @@
             <h2>Your Feed</h2>
         </div>
 
-        <!-- Post Creation Form (this stays outside the loop) -->
+        <!-- Post Creation Form -->
         <div class="post-create">
             <form action="/create-post" method="POST">
                 <textarea name="content" placeholder="What's happening?" rows="3"></textarea>
@@ -78,23 +125,25 @@
             </form>
         </div>
 
-        <!-- Posts -->
-        <div class="posts">
-            {{range .Posts}}
-            <div class="post">
-                <div class="post-header">
-                    <img src="{{.User.ProfilePictureBase64}}" alt="User Profile Picture" class="post-user-image">
-                    <span class="post-username">{{.User.Username}}</span>
-                </div>
-                <p class="post-content">{{.Content}}</p>
-                <p class="post-time">{{.CreatedAt}}</p>
-            </div>
-            {{end}}
-
-
-
-
+        <!-- Scrollable Posts Section -->
+        <div class="posts" style="max-height: 500px; overflow-y: auto;">
+            {{ range .Posts }}
+            <article class="post">
+                <header>
+                    <h2>{{ .User.Username }}</h2>
+                    <time datetime="{{ .CreatedAt }}">{{ .CreatedAt }}</time>
+                </header>
+                <p>{{ .Content }}</p>
+                {{ if eq .UserID $.User.ID }}
+                <form action="/delete-post" method="POST" class="delete-form">
+                    <input type="hidden" name="postID" value="{{ .ID }}">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+                {{ end }}
+            </article>
+            {{ end }}
         </div>
+
     </div>
 
     <!-- Right Sidebar (Optional Ads) -->

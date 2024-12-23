@@ -9,11 +9,18 @@
 <body>
 <div class="container">
   <h1>Create an Account</h1>
+
+  <!-- Display error message if it exists -->
+  {{if .ErrorMessage}}
+  <p class="error-message">{{.ErrorMessage}}</p>
+  {{end}}
+
   <form action="/register" method="POST">
     <input type="text" name="username" placeholder="Username" required minlength="3">
     <input type="password" name="password" placeholder="Password" required minlength="6">
     <button type="submit">Register</button>
   </form>
+
   <div class="footer">
     <p>Already have an account? <a href="/login">Sign In</a></p>
   </div>

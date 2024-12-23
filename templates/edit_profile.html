@@ -28,7 +28,7 @@
                 {{if .ProfilePictureData}}
                 <img src="data:image/jpeg;base64,{{.ProfilePictureBase64}}" alt="Profile Picture" class="profile-image">
                 {{else}}
-                <img src="/static/default-profile.png" alt="Default Profile Picture" class="profile-image">
+                <img src="/static/default_profile.jpg" alt="Default Profile Picture" class="profile-image">
                 {{end}}
             </div>
             <form action="/edit-profile" method="POST" enctype="multipart/form-data">

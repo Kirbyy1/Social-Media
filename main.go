@@ -17,22 +17,22 @@ var (
 )
 
 type User struct {
-	ID                   uint   `gorm:"primaryKey"`
-	Username             string `gorm:"unique;not null"`
-	Password             string `gorm:"not null"`
-	ProfilePicture       string `gorm:"not null;default:'default.png'"`
+	ID                   uint
+	Username             string `gorm:"unique"`
+	Password             string
+	ProfilePicture       string
 	ProfilePictureData   []byte
-	ProfilePictureBase64 string
-	Bio                  string `gorm:"type:text"`
+	ProfilePictureBase64 string `gorm:"-"`
+	Bio                  string
 	Posts                []Post `gorm:"foreignKey:UserID"`
 }
 
 type Post struct {
-	ID        uint      `gorm:"primaryKey"`
-	Content   string    `gorm:"not null"`
-	UserID    uint      `gorm:"not null"`
-	User      User      `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
-	CreatedAt time.Time `gorm:"autoCreateTime"`
+	ID        uint
+	Content   string
+	UserID    uint
+	User      User
+	CreatedAt time.Time
 }
 
 func seedData() {
@@ -67,6 +67,7 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("createPostHandler: Form submitted")
 
+	// Parse form data
 	err := r.ParseForm()
 	if err != nil {
 		log.Println("createPostHandler: Error parsing form", err)
@@ -83,25 +84,87 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Insert into database
+	// Retrieve the username from the cookie
+	cookie, err := r.Cookie("session")
+	if err != nil {
+		log.Println("createPostHandler: Session cookie not found", err)
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	username := cookie.Value
+	log.Println("createPostHandler: Username retrieved from cookie:", username)
+
+	// Fetch the user from the database
 	var user User
+	result := db.Where("username = ?", username).First(&user)
+	if result.Error != nil {
+		log.Println("createPostHandler: Error retrieving user from DB", result.Error)
+		http.Error(w, "User not found", http.StatusUnauthorized)
+		return
+	}
+
+	// Create the post with the correct user ID
 	post := Post{
 		Content:   content,
 		CreatedAt: time.Now(),
-		UserID:    user.ID, // add user identification here,
+		UserID:    user.ID,
 	}
 
-	result := db.Create(&post)
+	result = db.Create(&post)
 	if result.Error != nil {
 		log.Println("createPostHandler: Error creating post in DB", result.Error)
 		http.Error(w, "Failed to create post", http.StatusInternalServerError)
 		return
 	}
 
-	log.Println("createPostHandler: Post created successfully")
+	log.Println("createPostHandler: Post created successfully for user:", username)
 
 	// Redirect back to the feed or wherever appropriate
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func deletePostHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Get the post ID from the form
+	postID := r.FormValue("postID")
+
+	// Check if the user is logged in
+	cookie, err := r.Cookie("session")
+	if err != nil {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		return
+	}
+
+	// Retrieve the user from the database
+	var user User
+	result := db.Where("username = ?", cookie.Value).First(&user)
+	if result.Error != nil {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	// Check if the post exists and belongs to the user
+	var post Post
+	result = db.Where("id = ? AND user_id = ?", postID, user.ID).First(&post)
+	if result.Error != nil {
+		http.Error(w, "Post not found or unauthorized", http.StatusNotFound)
+		return
+	}
+
+	// Delete the post
+	result = db.Delete(&post)
+	if result.Error != nil {
+		http.Error(w, "Failed to delete post", http.StatusInternalServerError)
+		return
+	}
+
+	// Redirect back to the home page
+	http.Redirect(w, r, "/home", http.StatusSeeOther)
 }
 
 func initDB() {
@@ -224,15 +287,32 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Handle form submission
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 
+	// Validate input
+	if username == "" || password == "" {
+		tmpl.ExecuteTemplate(w, "register.html", "Username and password are required.")
+		return
+	}
+
 	// Create a new user
-	user := User{Username: username, Password: password}
-	result := db.Create(&user)
+	newUser := User{
+		Username: username,
+		Password: password, // Plain-text password (consider hashing in production)
+	}
+
+	// Attempt to save the user in the database
+	result := db.Create(&newUser)
 	if result.Error != nil {
-		tmpl.ExecuteTemplate(w, "register.html", "Error: "+result.Error.Error())
+		// Check if the error is due to a duplicate username
+		if result.Error.Error() == "UNIQUE constraint failed: users.username" {
+			tmpl.ExecuteTemplate(w, "register.html", "Username already exists. Please choose another.")
+			return
+		}
+
+		log.Println("Error creating user:", result.Error)
+		http.Error(w, "An unexpected error occurred", http.StatusInternalServerError)
 		return
 	}
 
@@ -250,9 +330,9 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 
 	var user User
-	result := db.Where("username = ? AND password = ?", username, password).First(&user)
-	if result.Error != nil {
-		tmpl.ExecuteTemplate(w, "login.html", "Invalid credentials")
+	result := db.Where("username = ?", username).First(&user)
+	if result.Error != nil || user.Password != password {
+		tmpl.ExecuteTemplate(w, "login.html", "Invalid credentials. Please try again.")
 		return
 	}
 
@@ -268,6 +348,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/home", http.StatusSeeOther)
 }
+
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	// Check if the session cookie exists
 	cookie, err := r.Cookie("session")
@@ -310,6 +391,10 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Fetch posts with preloaded User data
 	var posts []Post
+	db.Preload("User").Find(&posts)
+	for _, post := range posts {
+		log.Printf("Post ID: %d, UserID: %d", post.ID, post.UserID)
+	}
 	result = db.Preload("User").Order("created_at desc").Find(&posts)
 	if result.Error != nil {
 		log.Printf("Error fetching posts: %v", result.Error)
@@ -449,6 +534,7 @@ func main() {
 	http.HandleFunc("/update_bio", updateBioHandler)
 	http.HandleFunc("/profile_picture", getProfilePictureHandler)
 	http.HandleFunc("/create-post", createPostHandler)
+	http.HandleFunc("/delete-post", deletePostHandler)
 
 	log.Println("Server started on :8080")
 	log.Println("Server running at http://localhost:8080/")
