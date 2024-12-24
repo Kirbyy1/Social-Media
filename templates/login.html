@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
     <link rel="stylesheet" href="static/login.css">
+    <title>Login Form Style Google</title>
 </head>
 <body>
-<div class="container">
-    <h1>Sign In</h1>
+<div class="l-form">
+    <form id="login-form" action="/login" method="POST" class="form">
+        <h1 class="form__title">Sign In</h1>
 
-    <!-- Display error message if it exists -->
-    {{if .ErrorMessage}}
-    <p class="error-message">{{.ErrorMessage}}</p>
-    {{end}}
+        <div class="form__div">
+            <input type="text" name="username" class="form__input" placeholder=" " required>
+            <label for="" class="form__label">Username</label>
+        </div>
 
-    <form action="/login" method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
+        <div class="form__div">
+            <input type="password" name="password" class="form__input" placeholder=" " required>
+            <label for="" class="form__label">Password</label>
+        </div>
+
+        <p class="error-message" id="error-message">{{.ErrorMessage}}</p>
+
+        <input type="submit" class="form__button" value="Sign In">
     </form>
 
     <div class="footer">
         <p>Don't have an account? <a href="/register">Create one</a></p>
     </div>
 </div>
+
+
 </body>
 </html>
