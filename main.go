@@ -76,7 +76,7 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	content := r.FormValue("content")
-	log.Println("createPostHandler: Content received:", content)
+	//log.Println("createPostHandler: Content received:", content)
 
 	if content == "" {
 		log.Println("createPostHandler: Empty content")

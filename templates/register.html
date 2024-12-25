@@ -3,27 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
-  <link rel="stylesheet" href="static/login.css"> <!-- Use the same CSS as login -->
+  <title>Register - Alekkum Network</title>
+  <link rel="stylesheet" href="/static/home.css?v=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="/static/styles.css?v=1.0">
 </head>
 <body>
-<div class="container">
-  <h1>Create an Account</h1>
-
-  <!-- Display error message if it exists -->
-  {{if .ErrorMessage}}
-  <p class="error-message">{{.ErrorMessage}}</p>
-  {{end}}
-
-  <form action="/register" method="POST">
-    <input type="text" name="username" placeholder="Username" required minlength="3">
-    <input type="password" name="password" placeholder="Password" required minlength="6">
-    <button type="submit">Register</button>
-  </form>
-
-  <div class="footer">
-    <p>Already have an account? <a href="/login">Sign In</a></p>
+<div class="form-container">
+  <div class="form-box">
+    <h1 class="form__title">Register</h1>
+    <form action="/register" method="POST">
+      <div class="form__div">
+        <input type="text" name="username" class="form__input" placeholder=" " required>
+        <label for="username" class="form__label">Username</label>
+      </div>
+      <div class="form__div">
+        <input type="email" name="email" class="form__input" placeholder=" " required>
+        <label for="email" class="form__label">Email</label>
+      </div>
+      <div class="form__div">
+        <input type="password" name="password" class="form__input" placeholder=" " required>
+        <label for="password" class="form__label">Password</label>
+      </div>
+      <div class="form__div">
+        <input type="password" name="confirm_password" class="form__input" placeholder=" " required>
+        <label for="confirm_password" class="form__label">Confirm Password</label>
+      </div>
+      <button type="submit" class="form__button">Register</button>
+      <p class="signin-link">Already have an account? <a href="/login">Sign in</a></p>
+    </form>
   </div>
 </div>
+<script src="/static/home.js"></script>
 </body>
 </html>

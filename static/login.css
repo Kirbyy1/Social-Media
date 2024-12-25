@@ -1,10 +1,14 @@
-/* styles.css */
-body {
+/* Reset and base styles */
+* {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #141414; /* Dark background */
-    color: #fff; /* White text for contrast */
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,20 +16,32 @@ body {
     box-sizing: border-box;
 }
 
-.l-form {
-    background-color: #1a1a1a; /* Slightly lighter background for the form */
+/* Form Container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
     padding: 20px;
+}
+
+/* Form Box */
+.form-box {
+    background: #0a0a0a;
+    width: 100%;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    max-width: 400px;
-    width: 100%;
+    margin-bottom: 20px; /* Added margin to separate login and register forms */
 }
 
 .form__title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #1d9bf0; /* Highlighted blue */
+    color: #1d9bf0;
 }
 
 .form__div {
@@ -38,22 +54,23 @@ body {
     padding: 12px;
     border: none;
     border-radius: 5px;
-    background-color: #2c2c2c; /* Dark input background */
+    background-color: #0a0a0a;
     color: #fff;
     font-size: 16px;
     box-sizing: border-box;
-    outline: none; /* Remove default outline */
+    outline: none;
+    border: 1px solid #979797;
 }
 
 .form__input::placeholder {
-    color: transparent; /* Hide placeholder text */
+    color: transparent;
 }
 
 .form__input:focus + .form__label,
 .form__input:not(:placeholder-shown) + .form__label {
     transform: translateY(-20px);
     font-size: 12px;
-    color: #1d9bf0; /* Highlighted blue */
+    color: #1d9bf0;
 }
 
 .form__label {
@@ -61,19 +78,19 @@ body {
     left: 12px;
     top: 12px;
     padding: 0 5px;
-    background-color: #1a1a1a; /* Match form background */
+    background-color: #0a0a0a;
     transition: 0.3s;
-    color: #8a8a8a; /* Placeholder color */
+    color: #8a8a8a;
 }
 
 .form__input.invalid {
-    border-bottom: 2px solid red; /* Red underline for invalid inputs */
+    border-bottom: 2px solid red;
 }
 
 .form__button {
     width: 100%;
     padding: 12px;
-    background-color: #1d9bf0; /* Blue button */
+    background-color: #1d9bf0;
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -84,27 +101,19 @@ body {
 }
 
 .form__button:hover {
-    background-color: #0d8ce0; /* Lighter blue on hover */
+    background-color: #0d8ce0;
 }
 
-.error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-bottom: 1em;
-    text-align: center;
-    display: none; /* Hide error message by default */
-}
-
-.footer {
+.signin-link {
+    margin-top: 15px;
     font-size: 14px;
-    color: #8a8a8a; /* Subtle gray footer */
 }
 
-.footer a {
-    color: #1d9bf0; /* Link blue */
+.signin-link a {
+    color: #1d9bf0;
     text-decoration: none;
 }
 
-.footer a:hover {
+.signin-link a:hover {
     text-decoration: underline;
 }
