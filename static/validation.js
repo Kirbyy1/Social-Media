@@ -1,4 +1,4 @@
-document.getElementById("register-form").addEventListener("submit", function(event) {
+document.getElementById("register-form")?.addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent form submission
     let isValid = true;
 
@@ -48,6 +48,41 @@ document.getElementById("register-form").addEventListener("submit", function(eve
     // If valid, submit the form
     if (isValid) {
         alert("Registration successful!");
+        this.submit(); // Submit the form
+    }
+});
+
+document.getElementById("login-form")?.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+    let isValid = true;
+
+    // Get form inputs
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    // Get error message elements
+    const usernameError = document.getElementById("username-error");
+    const passwordError = document.getElementById("password-error");
+
+    // Clear previous error messages
+    usernameError.textContent = "";
+    passwordError.textContent = "";
+
+    // Validate username
+    if (username.length < 3) {
+        usernameError.textContent = "Username must be at least 3 characters.";
+        isValid = false;
+    }
+
+    // Validate password
+    if (password.length < 6) {
+        passwordError.textContent = "Password must be at least 6 characters.";
+        isValid = false;
+    }
+
+    // If valid, submit the form
+    if (isValid) {
+        alert("Login successful!");
         this.submit(); // Submit the form
     }
 });

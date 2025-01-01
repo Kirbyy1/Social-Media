@@ -3,53 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/login.css?v=1.0">
-    <title>Alekkum Network</title>
+    <link rel="stylesheet" href="static/register.css?v=1.0">
+    <title>Login - Alekkum Network</title>
 </head>
 <body>
 <div class="form-container">
     <div class="form-box">
+        <h1 class="form__title">Alekkum Network</h1>
         <form id="login-form" action="/login" method="POST" class="form">
-            <h1 class="form__title">Sign In</h1>
-
             <div class="form__div">
-                <input type="text" name="username" class="form__input" placeholder=" " required>
-                <label class="form__label">Username</label>
+                <input type="text" id="username" name="username" class="form__input" placeholder=" " required>
+                <label for="username" class="form__label">Username</label>
+                <p class="error-message" id="username-error"></p>
             </div>
 
             <div class="form__div">
                 <input type="password" id="password" name="password" class="form__input" placeholder=" " required>
-                <label class="form__label">Password</label>
-                <i id="password-icon" class="fas fa-eye toggle-password"
-                   onclick="togglePassword('password')"></i>
+                <label for="password" class="form__label">Password</label>
+                <i id="password-icon" class="fas fa-eye toggle-password" onclick="togglePassword('password')"></i>
+                <p class="error-message" id="password-error"></p>
             </div>
 
-            <p class="error-message" id="error-message">{{.ErrorMessage}}</p>
+            <div class="form__div">
+                <input type="checkbox" id="remember-me" name="remember_me">
+                <label for="remember-me">Remember Me</label>
+            </div>
 
-            <button type="submit" class="form__button">Sign In</button>
+            <button type="submit" class="form__button">Login</button>
         </form>
-    </div>
-
-    <div class="footer">
-        <p class="signin-link">Don't have an account? <a href="/register">Create one</a></p>
+        <p class="signin-link">Don't have an account? <a href="/register">Register</a></p>
     </div>
 </div>
+
+<script src="static/validation.js"></script>
 </body>
-
-<script>
-    function togglePassword(inputId) {
-        const passwordInput = document.getElementById(inputId);
-        const icon = document.getElementById(`${inputId}-icon`);
-
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            icon.classList.remove("fa-eye");
-            icon.classList.add("fa-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            icon.classList.remove("fa-eye-slash");
-            icon.classList.add("fa-eye");
-        }
-    }
-</script>
 </html>

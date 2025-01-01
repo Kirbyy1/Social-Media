@@ -320,6 +320,8 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("loginHandler called") // Verify the handler is called
+
 	if r.Method == http.MethodGet {
 		tmpl.ExecuteTemplate(w, "login.html", nil)
 		return
@@ -328,6 +330,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	// Authenticate the user
 	username := r.FormValue("username")
 	password := r.FormValue("password")
+	rememberMe := r.FormValue("remember_me") == "on"
 
 	var user User
 	result := db.Where("username = ?", username).First(&user)
@@ -336,16 +339,29 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Set a secure session (using HttpOnly and Secure flags for added security)
-	http.SetCookie(w, &http.Cookie{
+	// Check if the connection is secure (HTTPS)
+	secure := r.TLS != nil
+
+	// Set cookie expiration time based on "Remember Me" option
+	maxAge := 3600 // 1 hour
+	if rememberMe {
+		maxAge = 30 * 24 * 3600 // 30 days
+	}
+
+	// Create a session cookie
+	cookie := &http.Cookie{
 		Name:     "session",
 		Value:    username, // Store the username in the session
-		Path:     "/",
-		HttpOnly: true, // Only accessible by the server
-		Secure:   true, // Only transmitted over HTTPS
-		MaxAge:   3600, // Session expires in 1 hour
-	})
+		Path:     "/",      // Make the cookie accessible to all paths
+		HttpOnly: true,     // Only accessible by the server
+		Secure:   secure,   // Only transmitted over HTTPS
+		MaxAge:   maxAge,   // Session expiration time
+	}
 
+	// Log the cookie creation for debugging
+	log.Printf("Setting cookie: %+v\n", cookie)
+
+	http.SetCookie(w, cookie)
 	http.Redirect(w, r, "/home", http.StatusSeeOther)
 }
 
