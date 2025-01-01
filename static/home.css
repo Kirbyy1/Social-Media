@@ -6,6 +6,10 @@
     font-family: 'Roboto', Arial, sans-serif;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     background-color: #0a0a0a;
     color: #fff;
@@ -21,6 +25,9 @@ header {
     width: 100%;
     background-color: #0a0a0a;
     padding: 15px 0;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
 .container {
@@ -73,9 +80,11 @@ nav a:hover {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 100px; /* Adjusted for fixed header */
     padding: 20px;
     flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Feed Styles */
@@ -214,6 +223,9 @@ footer {
     color: #8a8a8a;
     font-size: 14px;
     border-top: 1px solid #2c2c2c;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 
 footer a {

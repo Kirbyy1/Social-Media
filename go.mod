@@ -3,6 +3,8 @@ module go-login-app
 go 1.23
 
 require (
+	github.com/gorilla/mux v1.8.1
+	github.com/gorilla/websocket v1.5.3
 	gorm.io/driver/sqlite v1.5.7
 	gorm.io/gorm v1.25.12
 )
