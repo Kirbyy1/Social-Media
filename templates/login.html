@@ -3,34 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/login.css">
+    <link rel="stylesheet" href="static/login.css?v=1.0">
     <title>Alekkum Network</title>
 </head>
 <body>
-<div class="l-form">
-    <form id="login-form" action="/login" method="POST" class="form">
-        <h1 class="form__title">Sign In</h1>
+<div class="form-container">
+    <div class="form-box">
+        <form id="login-form" action="/login" method="POST" class="form">
+            <h1 class="form__title">Sign In</h1>
 
-        <div class="form__div">
-            <input type="text" name="username" class="form__input" placeholder=" " required>
-            <label for="" class="form__label">Username</label>
-        </div>
+            <div class="form__div">
+                <input type="text" name="username" class="form__input" placeholder=" " required>
+                <label class="form__label">Username</label>
+            </div>
 
-        <div class="form__div">
-            <input type="password" name="password" class="form__input" placeholder=" " required>
-            <label for="" class="form__label">Password</label>
-        </div>
+            <div class="form__div">
+                <input type="password" id="password" name="password" class="form__input" placeholder=" " required>
+                <label class="form__label">Password</label>
+                <i id="password-icon" class="fas fa-eye toggle-password"
+                   onclick="togglePassword('password')"></i>
+            </div>
 
-        <p class="error-message" id="error-message">{{.ErrorMessage}}</p>
+            <p class="error-message" id="error-message">{{.ErrorMessage}}</p>
 
-        <input type="submit" class="form__button" value="Sign In">
-    </form>
+            <button type="submit" class="form__button">Sign In</button>
+        </form>
+    </div>
 
     <div class="footer">
-        <p>Don't have an account? <a href="/register">Create one</a></p>
+        <p class="signin-link">Don't have an account? <a href="/register">Create one</a></p>
     </div>
 </div>
-
-
 </body>
+
+<script>
+    function togglePassword(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const icon = document.getElementById(`${inputId}-icon`);
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>
 </html>

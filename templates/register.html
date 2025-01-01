@@ -3,38 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/register.css">
   <title>Register - Alekkum Network</title>
-  <link rel="stylesheet" href="/static/home.css?v=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="/static/styles.css?v=1.0">
 </head>
 <body>
 <div class="form-container">
   <div class="form-box">
     <h1 class="form__title">Register</h1>
-    <form action="/register" method="POST">
+    <form id="register-form">
       <div class="form__div">
-        <input type="text" name="username" class="form__input" placeholder=" " required>
+        <input type="text" id="username" name="username" class="form__input" placeholder=" " required>
         <label for="username" class="form__label">Username</label>
+        <p class="error-message" id="username-error"></p>
       </div>
+
       <div class="form__div">
-        <input type="email" name="email" class="form__input" placeholder=" " required>
+        <input type="email" id="email" name="email" class="form__input" placeholder=" " required>
         <label for="email" class="form__label">Email</label>
+        <p class="error-message" id="email-error"></p>
       </div>
+
       <div class="form__div">
-        <input type="password" name="password" class="form__input" placeholder=" " required>
+        <input type="password" id="password" name="password" class="form__input" placeholder=" " required>
         <label for="password" class="form__label">Password</label>
+        <i id="password-icon" class="fas fa-eye toggle-password" onclick="togglePassword('password')"></i>
+        <p class="error-message" id="password-error"></p>
       </div>
+
       <div class="form__div">
-        <input type="password" name="confirm_password" class="form__input" placeholder=" " required>
-        <label for="confirm_password" class="form__label">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm_password" class="form__input" placeholder=" " required>
+        <label for="confirm-password" class="form__label">Confirm Password</label>
+        <i id="confirm-password-icon" class="fas fa-eye toggle-password" onclick="togglePassword('confirm-password')"></i>
+        <p class="error-message" id="confirm-password-error"></p>
       </div>
+
       <button type="submit" class="form__button">Register</button>
-      <p class="signin-link">Already have an account? <a href="/login">Sign in</a></p>
     </form>
+    <p class="signin-link">Already have an account? <a href="/login">Sign in</a></p>
   </div>
 </div>
-<script src="/static/home.js"></script>
+
+<script src="static/validation.js"></script>
 </body>
 </html>
