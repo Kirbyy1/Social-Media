@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/register.css?v=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>Login - Alekkum Network</title>
 </head>
 <body>
@@ -21,6 +22,9 @@
                 <input type="password" id="password" name="password" class="form__input" placeholder=" " required>
                 <label for="password" class="form__label">Password</label>
                 <i id="password-icon" class="fas fa-eye toggle-password" onclick="togglePassword('password')"></i>
+                <span id="caps-lock-indicator-password" class="caps-lock-indicator">
+                    <i class="fas fa-keyboard"></i> CAPS LOCK
+                </span>
                 <p class="error-message" id="password-error"></p>
             </div>
 
@@ -36,5 +40,13 @@
 </div>
 
 <script src="static/validation.js"></script>
+<script>
+    // Attach the functionality to both fields
+    setupCapsLockIndicator('password', 'caps-lock-indicator-password');
+    setupCapsLockIndicator('confirm-password', 'caps-lock-indicator-confirm');
+
+
+    // Attach the show/hide password functionality (no changes needed; it’s already in use)
+</script>
 </body>
 </html>

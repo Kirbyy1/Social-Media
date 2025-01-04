@@ -87,6 +87,21 @@ document.getElementById("login-form")?.addEventListener("submit", function(event
     }
 });
 
+function setupCapsLockIndicator(inputId, indicatorId) {
+    const inputField = document.getElementById(inputId);
+    const capsLockIndicator = document.getElementById(indicatorId);
+
+    inputField.addEventListener('keyup', function (event) {
+        if (event.getModifierState('CapsLock')) {
+            capsLockIndicator.style.display = 'inline';
+        } else {
+            capsLockIndicator.style.display = 'none';
+        }
+    });
+}
+
+
+
 function togglePassword(inputId) {
     const passwordInput = document.getElementById(inputId);
     const icon = document.getElementById(`${inputId}-icon`);

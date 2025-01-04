@@ -49,6 +49,19 @@ body {
     margin-bottom: 25px;
 }
 
+/* Style for CAPS LOCK indicator */
+.caps-lock-indicator {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50%;
+    right: 45px; /* Adjust to avoid overlapping the eye icon */
+    transform: translateY(-50%);
+    color: #ff4d4d; /* Red color to grab attention */
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
 .form__input {
     width: 100%;
     padding: 15px;
@@ -156,6 +169,24 @@ input[type="checkbox"] {
 .signin-link a:hover {
     text-decoration: underline;
 }
+
+
+/* CAPS LOCK Indicator Style */
+.caps-lock-indicator {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50%;
+    right: 65px; /* Adjust to position it next to the "show password" icon */
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.caps-lock-indicator i {
+    margin-right: 5px; /* Space between the icon and the text */
+}
+
 
 .error-message {
     color: #ff4d4d; /* Red color for errors */

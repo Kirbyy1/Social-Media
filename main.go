@@ -2,6 +2,9 @@ package main
 
 import (
 	"encoding/base64"
+	"golang.org/x/crypto/bcrypt"
+
+	"fmt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"html/template"
@@ -281,6 +284,22 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/home", http.StatusSeeOther)
 }
 
+// Function to hash the password using bcrypt
+func hashPassword(password string) (string, error) {
+	// Generate a salt and hash the password
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
+	return string(hash), nil
+}
+
+// Function to compare the hashed password with the stored password
+func comparePasswords(storedPassword, providedPassword string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(storedPassword), []byte(providedPassword))
+	return err == nil
+}
+
 func registerHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		tmpl.ExecuteTemplate(w, "register.html", nil)
@@ -296,10 +315,13 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Create a new user
+	// In the registerHandler function
+	hashedPassword, _ := hashPassword(password)
+
+	// Create a new user with the hashed password
 	newUser := User{
 		Username: username,
-		Password: password, // Plain-text password (consider hashing in production)
+		Password: hashedPassword,
 	}
 
 	// Attempt to save the user in the database
@@ -334,7 +356,10 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 	var user User
 	result := db.Where("username = ?", username).First(&user)
-	if result.Error != nil || user.Password != password {
+	if result.Error != nil || !comparePasswords(user.Password, password) {
+		fmt.Println("wrong password")
+		log.Println("Stored password in DB:", user.Password)
+
 		tmpl.ExecuteTemplate(w, "login.html", "Invalid credentials. Please try again.")
 		return
 	}

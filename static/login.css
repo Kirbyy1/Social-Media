@@ -106,6 +106,21 @@ body {
     color: #1d9bf0;
 }
 
+/* CAPS LOCK Indicator Style */
+.caps-lock-indicator {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50%;
+    right: 65px; /* Positioned next to the "show password" icon */
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.caps-lock-indicator i {
+    margin-right: 5px; /* Space between icon and text */
+}
 
 
 /* Button */
