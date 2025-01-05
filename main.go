@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"golang.org/x/crypto/bcrypt"
 
-	"fmt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"html/template"
@@ -356,10 +355,20 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 	var user User
 	result := db.Where("username = ?", username).First(&user)
-	if result.Error != nil || !comparePasswords(user.Password, password) {
-		fmt.Println("wrong password")
-		log.Println("Stored password in DB:", user.Password)
+	if result.Error != nil {
+		if result.Error == gorm.ErrRecordNotFound {
+			log.Println("User not found:", username)
+			tmpl.ExecuteTemplate(w, "login.html", "Invalid credentials. Please try again.")
+			return
+		}
+		log.Println("Database error:", result.Error)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
 
+	// Compare passwords only if user exists
+	if !comparePasswords(user.Password, password) {
+		log.Println("Invalid password for user:", username)
 		tmpl.ExecuteTemplate(w, "login.html", "Invalid credentials. Please try again.")
 		return
 	}

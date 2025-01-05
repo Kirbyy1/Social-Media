@@ -47,7 +47,6 @@ document.getElementById("register-form")?.addEventListener("submit", function(ev
 
     // If valid, submit the form
     if (isValid) {
-        alert("Registration successful!");
         this.submit(); // Submit the form
     }
 });
@@ -82,7 +81,6 @@ document.getElementById("login-form")?.addEventListener("submit", function(event
 
     // If valid, submit the form
     if (isValid) {
-        alert("Login successful!");
         this.submit(); // Submit the form
     }
 });
